@@ -1,5 +1,7 @@
 /// <reference types="@types/google.maps" />
 
+import { User} from './User';
+import { Company} from './Company';
 
 export class CustomMap {
 
@@ -22,12 +24,17 @@ export class CustomMap {
     async initMap(htmlElementId: string ="map"): Promise<void> {
         const { Map } = await google.maps.importLibrary("maps") as google.maps.MapsLibrary;
         this.googleMap = new Map(document.getElementById(htmlElementId) as HTMLElement, {
-            center: { lat: -34.397, lng: 150.644 },
-            zoom: 8,
+            center: { lat: 0, lng: 0 },
+            zoom: 1,
         });
       }
 
-    addMarker(){
-        // this.googleMap
-    }
+   
+      addUserMarker(user: User): void{
+
+      }
+
+      addCompanyMarker(Company: Company): void{
+
+      }
 }
