@@ -32,6 +32,14 @@ export class CustomMap {
    
       addUserMarker(user: User): void{
 
+      new google.maps.Marker({
+            map: this.googleMap,
+            position:{
+                lat: 30.3753,
+                lng: 69.3451
+            }
+         })
+
       }
 
       addCompanyMarker(Company: Company): void{
