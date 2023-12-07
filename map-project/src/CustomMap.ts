@@ -1,48 +1,41 @@
 /// <reference types="@types/google.maps" />
+import { User } from "./User";
+import { Company } from "./Company";
 
-import { User} from './User';
-import { Company} from './Company';
+
+// instruction to how mappable interface look like. 
+// any class want to add marker have to satisfy the Mappable property 
+interface Mappable {
+    location: {
+        lat: number,
+        lng: number
+    }
+};
+
 
 export class CustomMap {
-
     private googleMap: google.maps.Map;
 
-     constructor(htmlElementId: string ="map") {
-
-        this.initMap(htmlElementId);
-        // const elementRef = document.getElementById(htmlElementId) as HTMLElement;
-
-        // const { Map } = await google.maps.importLibrary("maps") as google.maps.MapsLibrary;
-
-        //  this.googleMap = new google.maps.Map(elementRef,{
-        //     zoom:1,
-        //     center: { lat:  0, lng: 0 },
-        // });
-
+    constructor(divId: string) {
+        this.googleMap = new google.maps.Map(
+            document.getElementById(divId) as HTMLElement,
+            {
+                zoom: 1,
+                center: {
+                    lat: 0,
+                    lng: 0,
+                },
+            }
+        );
+    }
+    addMarker(mappable: Mappable): void {
+        new google.maps.Marker({
+            map: this.googleMap,
+            position: {
+                lat: mappable.location.lat,
+                lng: mappable.location.lng,
+            },
+        });
     }
 
-    async initMap(htmlElementId: string ="map"): Promise<void> {
-        const { Map } = await google.maps.importLibrary("maps") as google.maps.MapsLibrary;
-        this.googleMap = new Map(document.getElementById(htmlElementId) as HTMLElement, {
-            center: { lat: 0, lng: 0 },
-            zoom: 1,
-        });
-      }
-
-   
-      addUserMarker(user: User): void{
-
-      new google.maps.Marker({
-            map: this.googleMap,
-            position:{
-                lat: 30.3753,
-                lng: 69.3451
-            }
-         })
-
-      }
-
-      addCompanyMarker(Company: Company): void{
-
-      }
 }
