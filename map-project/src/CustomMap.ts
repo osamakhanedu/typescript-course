@@ -1,15 +1,14 @@
 /// <reference types="@types/google.maps" />
-import { User } from "./User";
-import { Company } from "./Company";
-
 
 // instruction to how mappable interface look like. 
 // any class want to add marker have to satisfy the Mappable property 
-interface Mappable {
+export interface Mappable {
     location: {
         lat: number,
         lng: number
-    }
+    };
+    markerContent(): string;
+    color?: string;
 };
 
 
@@ -29,13 +28,23 @@ export class CustomMap {
         );
     }
     addMarker(mappable: Mappable): void {
-        new google.maps.Marker({
+        const marker = new google.maps.Marker({
             map: this.googleMap,
             position: {
                 lat: mappable.location.lat,
                 lng: mappable.location.lng,
             },
+
         });
+
+
+        marker.addListener('click', () => {
+            const infowindow = new google.maps.InfoWindow({
+                content: mappable.markerContent()
+            })
+
+            infowindow.open(this.googleMap, marker);
+        })
     }
 
 }
