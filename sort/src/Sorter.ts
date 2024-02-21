@@ -1,9 +1,18 @@
-import { NumbersCollection } from "./NumbersCollection";
+
+/**
+ * Interface define structue or wide range of shape of javascript object. it also specify the properties and behaviour of object it can have.
+ */
+export interface Sortable {
+    length: number,
+    compare(leftIndex: number, rightIndex: number): boolean,
+    swap(leftIndex: number, rightIndex: number): void,
+};
+
 
 export class Sorter {
 
 
-    constructor(public collection: NumbersCollection) { }
+    constructor(public collection: Sortable) { }
 
     sort(): void {
 
