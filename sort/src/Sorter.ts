@@ -2,19 +2,17 @@
 /**
  * Interface define structue or wide range of shape of javascript object. it also specify the properties and behaviour of object it can have.
  */
-export interface Sortable {
-    length: number,
-    compare(leftIndex: number, rightIndex: number): boolean,
-    swap(leftIndex: number, rightIndex: number): void,
-};
+// export interface Sortable {
+//     length: number,
+//     compare(leftIndex: number, rightIndex: number): boolean,
+//     swap(leftIndex: number, rightIndex: number): void,
+// };
 
 
 export abstract class Sorter {
-
-
-   abstract get length() : number;
-   abstract compare(leftIndex: number, rightIndex: number): boolean;
-   abstract swap(leftIndex: number, rightIndex: number): void;
+    abstract get length(): number;
+    abstract compare(leftIndex: number, rightIndex: number): boolean;
+    abstract swap(leftIndex: number, rightIndex: number): void;
 
     sort(): void {
 

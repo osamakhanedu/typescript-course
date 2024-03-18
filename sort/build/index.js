@@ -1,17 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const NumbersCollection_1 = require("./NumbersCollection");
 const CharacterCollections_1 = require("./CharacterCollections");
-// const numbers = new NumbersCollection([-5, 3, 10, 6]);
+const LinkedList_1 = require("./LinkedList");
+const numbers = new NumbersCollection_1.NumbersCollection([-5, 3, 10, 6]);
+numbers.sort();
+// @ts-ignore
+console.log(numbers.data);
 const characters = new CharacterCollections_1.CharacterCollection('waxopn');
-// const linkList = new LinkedList();
-// linkList.add(20);
-// linkList.add(10);
-// linkList.add(2);
-// linkList.add(6);
-// linkList.print();
-// const sorter = new Sorter(numbers);
-// sorter.sort();
-// const sorter1 = new Sorter(characters);
-// sorter1.sort();
-// console.log(sorter.collection);
-// console.log(sorter1.collection);
+characters.sort();
+// @ts-ignore
+console.log(characters);
+const list = new LinkedList_1.LinkedList();
+list.add(3);
+list.add(2);
+list.add(6);
+list.add(4);
+list.sort();
+list.print();

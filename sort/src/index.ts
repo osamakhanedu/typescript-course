@@ -1,25 +1,26 @@
-import { Sorter } from './Sorter';
+
 import { NumbersCollection } from './NumbersCollection';
 import { CharacterCollection } from './CharacterCollections';
 import { LinkedList } from './LinkedList';
 
-// const numbers = new NumbersCollection([-5, 3, 10, 6]);
+const numbers = new NumbersCollection([-5, 3, 10, 6]);
+numbers.sort();
+// @ts-ignore
+console.log(numbers.data);
+
 const characters = new CharacterCollection('waxopn');
 
-// const linkList = new LinkedList();
+characters.sort();
+// @ts-ignore
+console.log(characters);
 
-// linkList.add(20);
-// linkList.add(10);
-// linkList.add(2);
-// linkList.add(6);
+const list = new LinkedList();
 
-// linkList.print();
-// const sorter = new Sorter(numbers);
-// sorter.sort();
+list.add(3);
+list.add(2);
+list.add(6);
+list.add(4);
 
-// const sorter1 = new Sorter(characters);
-// sorter1.sort();
+list.sort();
 
-// console.log(sorter.collection);
-
-// console.log(sorter1.collection);
+list.print();

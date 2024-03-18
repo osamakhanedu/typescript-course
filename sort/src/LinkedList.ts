@@ -1,3 +1,5 @@
+import { Sorter } from "./Sorter";
+
 class Node {
     public data: number;
     public next: Node | null;
@@ -8,11 +10,12 @@ class Node {
     }
 }
 
-export class LinkedList {
+export class LinkedList extends Sorter {
     public head: Node | null;
     private listLength: number = 0;
 
     constructor() {
+        super();
         this.head = null;
     }
 
@@ -20,15 +23,15 @@ export class LinkedList {
         const node = new Node(value);
 
         if (!this.head) {
-          this.head = node;
-          return;
+            this.head = node;
+            return;
         }
-    
+
         let tail = this.head;
         while (tail.next) {
-          tail = tail.next;
+            tail = tail.next;
         }
-    
+
         tail.next = node;
 
     }
@@ -95,16 +98,16 @@ export class LinkedList {
     print(): void {
         if (!this.head) {
             return;
-          }
-      
-          let node: Node | null = this.head;
-          while (node) {
-             // @ts-ignore: Unreachable code error
+        }
+
+        let node: Node | null = this.head;
+        while (node) {
+            // @ts-ignore: Unreachable code error
             console.log(node.data);
             node = node.next;
-          }
-        
+        }
+
     }
-    
-   
+
+
 }
