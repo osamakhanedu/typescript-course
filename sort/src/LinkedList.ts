@@ -8,7 +8,7 @@ class Node {
     }
 }
 
-class LinkedList {
+export class LinkedList {
     public head: Node | null;
     private listLength: number = 0;
 
@@ -17,28 +17,19 @@ class LinkedList {
     }
 
     add(value: number): void {
-
         const node = new Node(value);
 
-        ++this.listLength;
-
-        // empty head
         if (!this.head) {
-            this.head = node;
-            return;
+          this.head = node;
+          return;
         }
-
-        // find last node and attach node. 
-        // 1,next -> 2, next -> 3,null
-
+    
         let tail = this.head;
-
         while (tail.next) {
-            tail = tail.next;
+          tail = tail.next;
         }
-
+    
         tail.next = node;
-
 
     }
 
@@ -102,22 +93,18 @@ class LinkedList {
 
 
     print(): void {
-
         if (!this.head) {
             return;
-        }
-
-        let tail = this.head;
-
-        while (tail.next) {
-
-            // @ts-ignore: Unreachable code error
-            console.log(tail.data);
-
-            tail = tail.next;
-
-        }
-
+          }
+      
+          let node: Node | null = this.head;
+          while (node) {
+             // @ts-ignore: Unreachable code error
+            console.log(node.data);
+            node = node.next;
+          }
+        
     }
-
+    
+   
 }
