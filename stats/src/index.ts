@@ -1,5 +1,6 @@
 import { log } from 'console';
 import { CsvFileReader } from './CsvFileReader';
+import { MatchResult } from './MatchResult';
 // import fs from 'fs';
 
 // const matches = fs.readFileSync('football.csv', { encoding: 'utf-8' }).split('\n').map((line: string): string[] => line.split(','));
@@ -9,14 +10,6 @@ const fileReader = new CsvFileReader("football.csv");
 fileReader.read();
 
 
-
-// enum - enumeration 
-// set of very closely related value ( constant )
-enum MatchResult {
-    HomeWin = 'H',
-    AwayWin = 'A',
-    Draw = 'D'
-};
 
 let winCount = 0;
 
