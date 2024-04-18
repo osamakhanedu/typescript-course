@@ -11,7 +11,7 @@ class CsvFileReader {
         this.data = [];
     }
     read() {
-        this.data = fs_1.default.readFileSync('football.csv', { encoding: 'utf-8' }).split('\n').map((line) => line.split(','));
+        this.data = fs_1.default.readFileSync('football.csv', { encoding: 'utf-8' }).split('\n').map((line) => line.split(',')).map(this.mapRow);
     }
 }
 exports.CsvFileReader = CsvFileReader;
