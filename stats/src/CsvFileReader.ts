@@ -1,37 +1,25 @@
 import fs from 'fs';
-import { DateStringToDate } from './utils';
 import { MatchResult } from './MatchResult';
 
 
-type Match = [Date,string,string,number,number,MatchResult, string];
 
+export abstract class CsvFileReader<Type> {
 
-export class CsvFileReader {
-
-    public data: Match[];
+    public data: Type[];
 
     constructor(public fileName: string) {
 
         this.data = []
     }
 
+    abstract mapRow(row: string[]): Type;
 
     read(): void {
 
-        this.data = fs.readFileSync('football.csv', { encoding: 'utf-8' }).split('\n').map((line: string): string[] => line.split(',')).map((row: string[]): Match => {
-
-            return [
-                DateStringToDate(row[0]),
-                row[1],
-                row[2],
-                parseInt(row[3]),
-                parseInt(row[4]),
-                row[5] as MatchResult,
-                row[6]
-            ]
-
-        });
+        this.data = fs.readFileSync('football.csv', { encoding: 'utf-8' }).split('\n').map((line: string): string[] => line.split(',')).map(this.mapRow);
 
 
     }
+
+
 }
