@@ -1,7 +1,4 @@
 import fs from 'fs';
-import { MatchResult } from './MatchResult';
-
-
 
 export abstract class CsvFileReader<Type> {
 
@@ -20,6 +17,5 @@ export abstract class CsvFileReader<Type> {
 
 
     }
-
 
 }
