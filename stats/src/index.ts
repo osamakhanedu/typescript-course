@@ -2,6 +2,9 @@ import { log } from 'console';
 import { MatchReader } from './MatchReader';
 import { MatchResult } from './MatchResult';
 import { CsvFileReader } from './CsvFilerReader';
+import { WinAnalyzer } from './analyzer/WinAnalyzer';
+import { ConsoleTarget } from './output/ConsoleTarget';
+import { Summary } from './Summary';
 // import fs from 'fs';
 
 // const matches = fs.readFileSync('football.csv', { encoding: 'utf-8' }).split('\n').map((line: string): string[] => line.split(','));
@@ -14,16 +17,11 @@ const matchReader = new MatchReader(csvFileReader);
 matchReader.load();
 
 
-let winCount = 0;
+const matchAnalyzer = new WinAnalyzer();
+const printSummary = new ConsoleTarget();
+const matchSummary = new Summary(matchAnalyzer, printSummary);
 
 
-for (const match of matchReader.matches) {
+const matchResultSummary = matchSummary.analyzer.run(matchReader.matches);
 
-    if (match[1] === "Man United" && match[5] === MatchResult.HomeWin) {
-        winCount++;
-    } else if (match[2] === 'Man United' && match[5] === MatchResult.AwayWin) {
-        winCount++;
-    }
-}
-
-log('win count ' + winCount)
+matchSummary.outputTarget.print(matchResultSummary);

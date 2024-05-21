@@ -1,8 +1,7 @@
 import { CsvFileReader } from "./CsvFileReader";
 import { MatchResult } from "../MatchResult";
 import { DateStringToDate } from '../utils';
-
-export type Match = [Date, string, string, number, number, MatchResult, string];
+import { Match } from '../Match';
 
 
 export class MatchReader extends CsvFileReader<Match> {
