@@ -1,19 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const console_1 = require("console");
 const MatchReader_1 = require("./MatchReader");
-const MatchResult_1 = require("./MatchResult");
+const CsvFilerReader_1 = require("./CsvFilerReader");
+const WinAnalyzer_1 = require("./analyzer/WinAnalyzer");
+const ConsoleTarget_1 = require("./output/ConsoleTarget");
+const Summary_1 = require("./Summary");
 // import fs from 'fs';
 // const matches = fs.readFileSync('football.csv', { encoding: 'utf-8' }).split('\n').map((line: string): string[] => line.split(','));
-const fileReader = new MatchReader_1.MatchReader("football.csv");
-fileReader.read();
-let winCount = 0;
-for (const match of fileReader.data) {
-    if (match[1] === "Man United" && match[5] === MatchResult_1.MatchResult.HomeWin) {
-        winCount++;
-    }
-    else if (match[2] === 'Man United' && match[5] === MatchResult_1.MatchResult.AwayWin) {
-        winCount++;
-    }
-}
-(0, console_1.log)('win count ' + winCount);
+const csvFileReader = new CsvFilerReader_1.CsvFileReader("football.csv");
+const matchReader = new MatchReader_1.MatchReader(csvFileReader);
+matchReader.load();
+const matchAnalyzer = new WinAnalyzer_1.WinAnalyzer();
+const printSummary = new ConsoleTarget_1.ConsoleTarget();
+const matchSummary = new Summary_1.Summary(matchAnalyzer, printSummary);
+const matchResultSummary = matchSummary.analyzer.run(matchReader.matches);
+matchSummary.outputTarget.print(matchResultSummary);
