@@ -1,19 +1,27 @@
 interface UserProp {
-    name: string;
-    age: number;
+    name?: string;
+    age?: number;
 }
+
+type Callback = () => {}
 
 
 export class User {
 
+    events: { [key: string]: Callback[] } = {}
+
     constructor(private data: UserProp = { name: "", age: 0 }) { }
-    getProps(propertyName: string): (number | string) {
+    get(propertyName: string): (number | string) {
         return this.data[propertyName];
     }
-    setProps(propertyName: string, propertyValue: (number | string)): (number | string) {
+    set(update: UserProp): void {
 
-        this.data[propertyName] = propertyValue;
-        return this.getProps(propertyName);
+        Object.assign(this.data, update);
 
     }
+
+    on(eventName: string, listener: Callback): void {
+
+    }
+
 }
