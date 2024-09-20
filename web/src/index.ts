@@ -7,3 +7,10 @@ user.set({ name: 'myname 2' });
 
 console.log(user);
 
+
+user.on('click', () => {
+    console.log('click event ')
+})
+
+
+user.trigger('click');
