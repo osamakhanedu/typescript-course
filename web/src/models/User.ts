@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from "axios";
+import { Eventing } from "./Eventing";
 
 interface UserProp {
     id?: number;
@@ -11,7 +12,9 @@ type Callback = () => void// type alias
 
 export class User {
 
-    events: { [key: string]: Callback[] } = {}
+
+
+    public events: Eventing = new Eventing();
 
     constructor(private data: UserProp = { name: "", age: 0 }) { }
     get(propertyName: string): (number | string) {
@@ -23,27 +26,6 @@ export class User {
 
     }
 
-    on(eventName: string, listener: Callback): void {
-
-        const handlers = this.events[eventName] || [];
-        handlers.push(listener);
-        this.events[eventName] = handlers;
-
-    }
-
-    trigger(eventName: string): void {
-        const handlers = this.events[eventName] || [];
-
-        if (handlers.length === 0) {
-            return;
-
-        }
-
-        handlers.forEach(callback => {
-            callback();
-        })
-    }
-
     fetch(): void {
         axios.get(`http://localhost:3000/users/${this.get('id')}`)
             .then((response: AxiosResponse): void => {
@@ -51,13 +33,13 @@ export class User {
             })
     }
 
-    save(): void{
+    save(): void {
         const id = this.get('id');
 
-        if(id){
-            axios.put(`http://localhost:3000/users/${id}`,this.data);
-        }else{
-            axios.post(`http://localhost:3000/users`,this.data);
+        if (id) {
+            axios.put(`http://localhost:3000/users/${id}`, this.data);
+        } else {
+            axios.post(`http://localhost:3000/users`, this.data);
 
         }
     }

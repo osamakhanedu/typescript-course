@@ -4,7 +4,7 @@
   "description": "buiding framework in typescript",
   "main": "index.js",
   "scripts": {
-    "start:parcel": "npx parcel index.html",
+    "start:parcel": "./node_modules/.bin/parcel  index.html",
     "start:db": "json-server -w db.json"
   },
   "author": "",
@@ -15,6 +15,7 @@
   },
   "devDependencies": {
     "buffer": "^6.0.3",
+    "parcel": "^2.13.0",
     "process": "^0.11.10"
   }
 }
